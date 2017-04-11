@@ -16,20 +16,47 @@ public class BookCatelogService {
 	@Autowired
 	private BookRepository repository;
 
+	/**
+	 * 
+	 * @param bookId
+	 * @return Book
+	 */
 	@Cacheable("books")
 	public Book findBook(String bookId) {
 		return repository.findOne(bookId);
 	}
-	
-	public List<Book> findBooks(){
+
+	/**
+	 * 
+	 * @return List<Book>
+	 */
+	public List<Book> findBooks() {
 		return repository.findAll();
 	}
-	
-	public List<Book> saveBooks(List<Book> books){
+
+	/**
+	 * 
+	 * @return long
+	 */
+	public long countBooks() {
+		return repository.count();
+	}
+
+	/**
+	 * 
+	 * @param books
+	 * @return List<Book>
+	 */
+	public List<Book> saveBooks(List<Book> books) {
 		return repository.save(books);
 	}
-	
-	public Iterable<Book> findBooks(List<Book> books){
+
+	/**
+	 * 
+	 * @param books
+	 * @return Iterable<Book>
+	 */
+	public Iterable<Book> findBooks(List<Book> books) {
 		List<String> bookIds = new ArrayList<>();
 		books.forEach(b -> bookIds.add(b.getId()));
 		return repository.findAll(bookIds);
