@@ -41,7 +41,7 @@ public class BookController {
 	@PostConstruct
 	public void init() {
 
-		if (bookService.findBooks().size() > 0) {
+		if (bookService.countBooks() > 0) {
 			return;
 		}
 
