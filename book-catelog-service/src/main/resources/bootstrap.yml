@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: book-catelog-service
+  cloud:
+    config:
+      uri: http://localhost:8888

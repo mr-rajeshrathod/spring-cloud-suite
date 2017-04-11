@@ -1,0 +1,20 @@
+server:
+  port: 8006
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost/spring-cloud
+  redis:
+    host: localhost
+    port: 6379
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+management:
+  security:
+    enabled: false
