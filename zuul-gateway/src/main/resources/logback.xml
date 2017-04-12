@@ -5,18 +5,37 @@
 		<destination>127.0.0.1:5000</destination>
 
 		<!-- encoder is required -->
-		<encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<mdc />
+				<context />
+				<logLevel />
+				<loggerName />
+				<pattern>
+					<pattern>
+						{
+						"serviceName": "zuul-gateway"
+						}
+					</pattern>
+				</pattern>
+				<threadName />
+				<message />
+				<logstashMarkers />
+				<stackTrace />
+			</providers>
+		</encoder>
 	</appender>
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- Log message format -->
 		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
 		</encoder>
 	</appender>
 
 	<root level="INFO">
 		<appender-ref ref="LOGSTASH" />
-		<appender-ref ref="STDOUT"/>
+		<appender-ref ref="STDOUT" />
 	</root>
 </configuration>
