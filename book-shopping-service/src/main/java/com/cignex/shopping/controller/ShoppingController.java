@@ -21,7 +21,7 @@ public class ShoppingController {
 	@Autowired
 	private ShoppingService service;
 
-	@RequestMapping(value = "/shopping/version")
+	@RequestMapping(value = "/cart/version")
 	public String getVersion() {
 		return "1.0";
 	}
