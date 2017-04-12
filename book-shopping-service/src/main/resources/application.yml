@@ -6,7 +6,7 @@ spring:
       uri: mongodb://localhost/spring-cloud
 eureka:
   instance:
-    prefer-ip-address: true
+    hostname: localhost
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/

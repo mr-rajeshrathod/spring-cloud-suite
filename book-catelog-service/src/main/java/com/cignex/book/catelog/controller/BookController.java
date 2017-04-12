@@ -23,6 +23,10 @@ public class BookController {
 	@Autowired
 	private BookCatelogService bookService;
 
+	/**
+	 * 
+	 * @return Iterable<Book>
+	 */
 	@RequestMapping(value = "/catelog/books/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Iterable<Book> books() {
 		return bookService.findBooks();

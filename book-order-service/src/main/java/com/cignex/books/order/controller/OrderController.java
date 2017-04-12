@@ -16,7 +16,7 @@ public class OrderController {
 	@Autowired
 	private OrderRepository repository;
 
-	@RequestMapping(value = "/cart/order", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/order/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Order placeOrder(@RequestBody Order order) {
 		return repository.save(order);
 	}
