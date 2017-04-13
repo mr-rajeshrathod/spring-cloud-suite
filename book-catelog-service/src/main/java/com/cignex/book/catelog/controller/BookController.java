@@ -38,8 +38,8 @@ public class BookController {
 	}
 
 	@RequestMapping(value = "/catelog/books", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public Iterable<Book> getBooks(@RequestBody List<Book> bookIds) {
-		return bookService.findBooks(bookIds);
+	public Iterable<Book> getBooks(@RequestBody List<Book> books) {
+		return bookService.findBooks(books);
 	}
 
 	@PostConstruct

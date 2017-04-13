@@ -5,6 +5,7 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 zuul:
+  ignoredServices: '*'
   prefix: /api
   routes:
     book-catelog-service:
