@@ -1,10 +1,11 @@
 package com.cignex.shopping.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,11 @@ import com.cignex.shopping.model.Book;
 import com.cignex.shopping.model.Order;
 import com.cignex.shopping.model.UserCart;
 import com.cignex.shopping.repository.ShoppingRepository;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Service
 public class ShoppingService {
+
+	private static final Logger log = LoggerFactory.getLogger(ShoppingService.class);
 
 	@Autowired
 	private ShoppingRepository repository;
@@ -36,6 +38,8 @@ public class ShoppingService {
 	 */
 	public UserCart addBookToCart(String token, List<Book> books) {
 
+		log.debug("addBookToCart(), token:" + token);
+
 		List<String> bookIds = new ArrayList<>();
 
 		UserCart cart = repository.findByToken(token);
@@ -52,14 +56,14 @@ public class ShoppingService {
 		return repository.save(cart);
 	}
 
-	@HystrixCommand(fallbackMethod = "bookNotFound")
 	public Iterable<Book> getCart(String token) {
 
 		UserCart cart = repository.findByToken(token);
 		List<Book> bookIds = new ArrayList<>();
-		
+
 		cart.getBooks().forEach(b -> bookIds.add(new Book(b)));
-		
+
+		log.debug("getCart() with bookId " + bookIds);
 		return bookCatelogClient.getBooks(bookIds);
 	}
 
@@ -68,7 +72,6 @@ public class ShoppingService {
 	 * @param token
 	 * @return Order
 	 */
-	@HystrixCommand(fallbackMethod = "orderServiceDown")
 	public Order placeOrder(String token) {
 
 		Order order = new Order();
@@ -78,23 +81,5 @@ public class ShoppingService {
 		order.setOrderDate(new Date());
 
 		return bookOrderClient.placeOrder(order);
-	}
-	
-	/**
-	 * 
-	 * @param token
-	 * @return
-	 */
-	public Iterable<Book> bookNotFound(String token) {
-		return Collections.emptyList();
-	}
-	
-	/**
-	 * 
-	 * @param token
-	 * @return
-	 */
-	public Order orderServiceDown(String token) {
-		return new Order();
 	}
 }

@@ -3,6 +3,8 @@ package com.cignex.book.catelog.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import com.cignex.book.catelog.repository.BookRepository;
 @Service
 public class BookCatelogService {
 
+	private static final Logger log = LoggerFactory.getLogger(BookCatelogService.class);
+	
 	@Autowired
 	private BookRepository repository;
 
@@ -57,6 +61,9 @@ public class BookCatelogService {
 	 * @return Iterable<Book>
 	 */
 	public Iterable<Book> findBooks(List<Book> books) {
+		
+		log.debug("Finding books " + books);
+		
 		List<String> bookIds = new ArrayList<>();
 		books.forEach(b -> bookIds.add(b.getId()));
 		return repository.findAll(bookIds);

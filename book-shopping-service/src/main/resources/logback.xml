@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	<appender name="LOGSTASH"
-		class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-		<destination>127.0.0.1:5000</destination>
 
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+	<appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<destination>127.0.0.1:5000</destination>
 		<!-- encoder is required -->
 		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
 			<providers>
 				<mdc />
 				<context />
+				<version />
 				<logLevel />
 				<loggerName />
 				<pattern>
 					<pattern>
 						{
-						"serviceName": "book-shopping-service"
+						"service_name": "book-shopping-service"
 						}
 					</pattern>
 				</pattern>
@@ -29,13 +30,16 @@
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- Log message format -->
 		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			<pattern>%d{HH:mm:ss.SSS} [%thread, %X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %-5level %logger{36} - %msg%n
 			</pattern>
 		</encoder>
 	</appender>
-
+	
+	<logger name="com.cignex" level="DEBUG" additivity="false">
+		<appender-ref ref="LOGSTASH" />	
+	</logger>
+	
 	<root level="INFO">
-		<appender-ref ref="LOGSTASH" />
 		<appender-ref ref="STDOUT" />
 	</root>
 </configuration>
