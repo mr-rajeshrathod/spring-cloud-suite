@@ -14,7 +14,7 @@
 				<pattern>
 					<pattern>
 						{
-						"serviceName": "eureka-service-registry"
+						"service_name": "eureka-service-registry"
 						}
 					</pattern>
 				</pattern>
@@ -35,7 +35,6 @@
 	</appender>
 
 	<root level="INFO">
-		<appender-ref ref="LOGSTASH" />
 		<appender-ref ref="STDOUT" />
 	</root>
 </configuration>

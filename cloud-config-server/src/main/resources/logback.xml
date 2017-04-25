@@ -14,7 +14,7 @@
 				<pattern>
 					<pattern>
 						{
-						"serviceName": "cloud-config-server"
+						"service_name": "cloud-config-server"
 						}
 					</pattern>
 				</pattern>
@@ -35,7 +35,6 @@
 	</appender>
 
 	<root level="INFO">
-		<appender-ref ref="LOGSTASH" />
 		<appender-ref ref="STDOUT" />
 	</root>
 </configuration>

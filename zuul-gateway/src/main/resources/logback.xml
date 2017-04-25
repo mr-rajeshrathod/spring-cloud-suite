@@ -14,7 +14,7 @@
 				<pattern>
 					<pattern>
 						{
-						"serviceName": "zuul-gateway"
+						"service_name": "zuul-gateway"
 						}
 					</pattern>
 				</pattern>
@@ -35,7 +35,6 @@
 	</appender>
 
 	<root level="INFO">
-		<appender-ref ref="LOGSTASH" />
 		<appender-ref ref="STDOUT" />
 	</root>
 </configuration>

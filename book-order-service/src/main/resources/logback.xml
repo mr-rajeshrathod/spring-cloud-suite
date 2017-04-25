@@ -14,7 +14,7 @@
 				<pattern>
 					<pattern>
 						{
-						"serviceName": "book-order-service"
+						"service_name": "book-order-service"
 						}
 					</pattern>
 				</pattern>
@@ -33,9 +33,12 @@
 			</pattern>
 		</encoder>
 	</appender>
-
+	
+	<logger name="com.cignex" level="DEBUG" additivity="false">
+		<appender-ref ref="LOGSTASH" />	
+	</logger>
+	
 	<root level="INFO">
-		<appender-ref ref="LOGSTASH" />
 		<appender-ref ref="STDOUT" />
 	</root>
 </configuration>

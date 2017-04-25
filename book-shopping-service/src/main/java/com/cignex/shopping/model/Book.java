@@ -42,4 +42,9 @@ public class Book {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	@Override
+	public String toString() {
+		return "[id="+getId()+", title="+getTitle()+", description="+getDescription()+"]";
+	}
 }
