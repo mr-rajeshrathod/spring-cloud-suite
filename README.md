@@ -12,3 +12,7 @@
 - Enable Slueth/Zipkin for Request Tracing in Distributed Environment
 - Hystrix Dashboard
 - Turbine Stream
+
+### Prerequisite
+- Elastic, Kibana and LogStash (Port:5000) running on local.
+- Redis Server running on localhost:6379
