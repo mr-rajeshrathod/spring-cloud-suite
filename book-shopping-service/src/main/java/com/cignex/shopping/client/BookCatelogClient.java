@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cignex.shopping.model.Book;
 
-@FeignClient("http://book-catelog-service")
+@FeignClient(name = "book-catelog-service")
 public interface BookCatelogClient {
 
 	@RequestMapping(value = "/catelog/books", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

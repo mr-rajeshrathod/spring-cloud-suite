@@ -3,6 +3,6 @@ spring:
     config:
       server:
         git:
-          uri: file://E:/Research/maven/spring-cloud-config
+          uri: file://E:/Research/upoint-maven/spring-cloud-config
 server:
   port: 8888

@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 @Service
 public class ShoppingService {
 
+	private static final Logger log = LoggerFactory.getLogger(ShoppingService.class);
+	
 	@Autowired
 	private ShoppingRepository repository;
 
@@ -36,6 +40,8 @@ public class ShoppingService {
 	 */
 	public UserCart addBookToCart(String token, List<Book> books) {
 
+		log.info("addBookToCart(), token:" + token);
+		
 		List<String> bookIds = new ArrayList<>();
 
 		UserCart cart = repository.findByToken(token);
@@ -55,6 +61,8 @@ public class ShoppingService {
 	@HystrixCommand(fallbackMethod = "bookNotFound")
 	public Iterable<Book> getCart(String token) {
 
+		log.info("getCart(), token:" + token);
+		
 		UserCart cart = repository.findByToken(token);
 		List<Book> bookIds = new ArrayList<>();
 		
