@@ -1,6 +1,6 @@
 spring:
   application:
     name: zuul-gateway
-  cloud:
+  cloud: # Enable integration with Config Server
     config:
-      enabled: false
+      enabled: true
